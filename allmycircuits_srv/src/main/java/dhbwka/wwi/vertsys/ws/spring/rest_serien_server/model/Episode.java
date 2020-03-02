@@ -10,14 +10,13 @@
  */
 package dhbwka.wwi.vertsys.ws.spring.rest_serien_server.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import lombok.Data;
-/* import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter; */
 import lombok.RequiredArgsConstructor;
 
 /**
@@ -28,11 +27,19 @@ import lombok.RequiredArgsConstructor;
 @Entity
 @RequiredArgsConstructor
 public class Episode {
-    @Id
-    @GeneratedValue
-    private long Id;
+
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "episode_id", unique = true, nullable = false)    
+    private long episode_id;
 
     private int nr = -1;
 
-    private String title = "";    
+    private String title = "";
+
+    public Episode(int _nr, String _title) {
+        this.nr = _nr;
+        this.title = _title;
+	}
+
 }

@@ -10,12 +10,16 @@
  */
 package dhbwka.wwi.vertsys.ws.spring.rest_serien_server.model;
 
+import java.util.List;
+
 import javax.annotation.Generated;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
 import lombok.Data;
@@ -25,18 +29,17 @@ import lombok.Setter; */
 
 /**
  * Series
- * @Getter @Setter @NoArgsConstructor
  */
 @Data
 @Entity
 public class Series {
 
-    //     @Column(length = 15)
     @Id
-    //@GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "Id", nullable = false, precision = 3, scale = 0)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //(strategy = GenerationType.AUTO)
+    @Column(name = "series_id", updatable = false, nullable = false)
+/*     @Column(name = "Id", nullable = false, precision = 3, scale = 0)
     @GeneratedValue(generator = "seq_generator", strategy = GenerationType.SEQUENCE)
-    @SequenceGenerator(name="seq_generator", sequenceName = "SEQ_ID_SERIES", allocationSize=1)
+    @SequenceGenerator(name="seq_generator", sequenceName = "SEQ_ID_SERIES", allocationSize=1) */
     private Long id;
 
     @Column(length = 50)
@@ -53,6 +56,8 @@ public class Series {
     private int numberOfSeasons = -1;
     private int numberOfEpisodes = -1;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "series")
+    private List<Season> seasons;
 
     public Series() {
     }
@@ -71,5 +76,14 @@ public class Series {
         this.numberOfSeasons = numberOfSeasons;
         this.numberOfEpisodes = numberOfEpisodes;
     }
-    
+        
+    public Series( String title, String genre, String country, int fromYear, int toYear, int numberOfSeasons, int numberOfEpisodes) {
+        this.title = title;
+        this.genre = genre;
+        this.country = country;
+        this.fromYear = fromYear;
+        this.toYear = toYear;
+        this.numberOfSeasons = numberOfSeasons;
+        this.numberOfEpisodes = numberOfEpisodes;
+    }
 }

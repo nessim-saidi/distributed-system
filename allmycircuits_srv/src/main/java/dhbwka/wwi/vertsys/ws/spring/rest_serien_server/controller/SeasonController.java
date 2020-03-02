@@ -38,19 +38,20 @@ public class SeasonController {
      */
     @RequestMapping(method = RequestMethod.GET, produces = "application/json")
     public List<Season> findAllSeasonsForSeries(@PathVariable(value="id") Long id) {
+
+        // suche nach der zugehörigen Serie zur gegebenen Id
         Optional<Series> foundSeries = SeriesRepo.findById(id);
         List<Season> seasons = null;
+
+        //falls die Serie gefunden wurde, suche nach zugehörigen Staffeln
         if(foundSeries.isPresent()) {
             SeasonId seasonId = new SeasonId(id, -1);
-
-            //Optional<Season> foundSeasons = SeasonRepo.findAllById(seasonId);
-            
-            /* if (foundSeasons.isPresent() ) {
-                seasons = foundSeasons.get();
-            }    */  
-
+            List<Season> foundSeasons = SeasonRepo.findBySeries(foundSeries.get());
+            // 
+            if (!foundSeasons.isEmpty() ) {
+                seasons = foundSeasons;
+            }
         }        
         return seasons;   
-    }
-    
+    }    
 }
