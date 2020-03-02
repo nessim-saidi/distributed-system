@@ -1,3 +1,13 @@
+/*
+ * Copyright © 2020 Dennis Schulmeister-Zimolong (Original)
+ * Nessim Saidi (Spring Boot Implementierung)
+ * 
+ * E-Mail: dhbw@windows3.de
+ * Webseite: https://www.wpvs.de/
+ * 
+ * Dieser Quellcode ist lizenziert unter einer
+ * Creative Commons Namensnennung 4.0 International Lizenz.
+ */
 package dhbwka.wwi.vertsys.ws.spring.rest_serien_server.controller;
 
 import java.util.List;

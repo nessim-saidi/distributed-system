@@ -1,17 +1,23 @@
+/*
+ * Copyright © 2020 Dennis Schulmeister-Zimolong (Original)
+ * Nessim Saidi (Spring Boot Implementierung)
+ * 
+ * E-Mail: dhbw@windows3.de
+ * Webseite: https://www.wpvs.de/
+ * 
+ * Dieser Quellcode ist lizenziert unter einer
+ * Creative Commons Namensnennung 4.0 International Lizenz.
+ */
 package dhbwka.wwi.vertsys.ws.spring.rest_serien_server.controller;
 
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.bind.DefaultValue;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import dhbwka.wwi.vertsys.ws.spring.rest_serien_server.model.Episode;
@@ -47,8 +53,9 @@ public class SeriesController {
      * @return Eine Liste mit allen gefundenen Serien
      */
 /*     public ResponseEntity<Series> findSeries(@RequestParam("query") @DefaultValue("") String query) {
-        // TODO service call
-        final Series allSeries = new Series(0, "All my Circuits", "Comedy", "US", 2608, 2714, 106, 34251);
+        // TODO Erweiterung der Service-Schnittstelle um parametrisierte Queries
+        // Muster: /api/series?title=Stranger%20Things
+        final Series allSeries = // Serien über Query-Parameter ermitteln
         return new ResponseEntity<Series>(allSeries, HttpStatus.OK);
     } */
 
@@ -128,13 +135,4 @@ public class SeriesController {
         return deletedSeries;
     }
 
-    // TODO refactor move or check if required
-    @RequestMapping(value = "/Episodes", method = RequestMethod.GET, produces = "application/json")
-    public Episode getEpisodes() {
-        final Episode ep = new Episode();
-        //final Series allSeries = new Series("0", "All my Circuits", "Comedy", "US", 2608, 2714, 106, 34251);
-        //ep.setTitle("Automatron");
-        return ep;
-    }
-    
 }

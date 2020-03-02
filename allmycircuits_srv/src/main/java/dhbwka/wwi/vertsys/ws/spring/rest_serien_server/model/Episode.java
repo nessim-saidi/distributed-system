@@ -21,7 +21,6 @@ import lombok.RequiredArgsConstructor;
 
 /**
  * Episode
- * @Getter @Setter @NoArgsConstructor
  */
 @Data
 @Entity

@@ -12,7 +12,6 @@ package dhbwka.wwi.vertsys.ws.spring.rest_serien_server.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -35,7 +34,6 @@ import lombok.NoArgsConstructor;
 
 /**
  * Season
- * @Getter @Setter @NoArgsConstructor
  */
 @Data
 @Entity
@@ -44,7 +42,7 @@ import lombok.NoArgsConstructor;
 public class Season implements Serializable {
 
 	@Id
-    @ManyToOne //(cascade = CascadeType.ALL)
+    @ManyToOne
     @JsonIgnoreProperties("seasons")        // Zirkulären Aufruf bei JSON-Serialisierung verhindern
     @JoinColumn(name = "series_id", insertable = false, updatable = false)
     private Series series = null;
@@ -67,7 +65,7 @@ public class Season implements Serializable {
     
     public Season(Series _series, int _season, int _year, String[] _episodes) {
         List<Episode> newEpisodes = new ArrayList<Episode>();
-        int seasonNr = 1;
+        int episodeNr = 1;
 
         this.series = _series;
         this.seasonNumber = _season;
@@ -76,10 +74,10 @@ public class Season implements Serializable {
 
         // erstelle eine Episode je Titel aus dem String-Array
         for (String ep : _episodes) {
-            newEpisodes.add(new Episode(seasonNr++, ep));
+            newEpisodes.add(new Episode(episodeNr++, ep));
         }
 
         this.episodes = newEpisodes;
-	}
+    }
 
 }
