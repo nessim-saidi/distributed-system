@@ -20,13 +20,11 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.ManyToOne;
 import javax.persistence.OrderBy;
 
 import lombok.Data;
-/* import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter; */
 
 /**
  * Season
@@ -34,6 +32,7 @@ import lombok.Setter; */
  */
 @Data
 @Entity
+@IdClass(SeasonId.class)
 public class Season implements Serializable {
 
     @Id

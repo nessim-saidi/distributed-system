@@ -82,11 +82,12 @@ public class SeriesController {
         if (foundSeries.isPresent() ) {
             transportSeries = foundSeries.get();
         } 
-            return transportSeries;
+        
+        return transportSeries;
     }
 
     /**
-     * PUT /api/Series/{id}/
+     * PUT /api/Series/{id}
      *
      * Aktualisieren einer vorhandenen Serie.
      *
@@ -94,10 +95,18 @@ public class SeriesController {
      * @return Gespeicherte Serie
      */
     @RequestMapping(value = "/Series/{id}", method = RequestMethod.PUT, produces = "application/json")
-    public Series updateSeries(@PathVariable(value="id") Long id, @RequestBody Series series) {
-        // TODO service call
-        Series newSeries = new Series();
-        return newSeries;
+    public Series updateSeries(@PathVariable(value="id") Long id, @RequestBody Series updatedSeries) {
+        // überschreibe bestehende Serie, falls sie gefunden wird
+        return SeriesRepo.findById(id)
+            .map(series -> {
+                updatedSeries.setId(series.getId());            
+            return SeriesRepo.save(updatedSeries);
+          })
+          // oder erstelle einen neuen Datensatz mit der vorgegebenen Id
+          .orElseGet(() -> {
+            updatedSeries.setId(id);
+            return SeriesRepo.save(updatedSeries);
+          });
     }
 
     /**
