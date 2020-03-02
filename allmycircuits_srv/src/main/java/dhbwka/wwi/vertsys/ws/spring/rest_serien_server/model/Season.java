@@ -44,7 +44,7 @@ public class Season implements Serializable {
 	@Id
     @ManyToOne
     @JsonIgnoreProperties("seasons")        // Zirkulären Aufruf bei JSON-Serialisierung verhindern
-    @JoinColumn(name = "series_id", insertable = false, updatable = false)
+    @JoinColumn(name = "series_id", insertable = false)
     private Series series = null;
 
     @Id

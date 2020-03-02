@@ -85,12 +85,12 @@ public class SeriesController {
     @RequestMapping(value = "/Series/{id}", method = RequestMethod.GET, produces = "application/json")
     public Series getSeries(@PathVariable(value="id") Long id) {
         Optional<Series> foundSeries = SeriesRepo.findById(id);
-        Series transportSeries = null;
+        Series returnSeries = null;
         if (foundSeries.isPresent() ) {
-            transportSeries = foundSeries.get();
+            returnSeries = foundSeries.get();
         } 
         
-        return transportSeries;
+        return returnSeries;
     }
 
     /**
