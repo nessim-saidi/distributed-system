@@ -140,7 +140,7 @@ public class SeasonController {
         Optional<Season> foundSeason = SeasonRepo.findById(seasonId);
 
         if (foundSeason.isPresent()) {
-            SeasonRepo.delete(foundSeason.get());
+            SeasonRepo.deleteById(seasonId);
             return foundSeason.get();
         } else {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Series " + id + " Not Found");
